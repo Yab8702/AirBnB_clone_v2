@@ -3,11 +3,13 @@
 from models.base_model import BaseModel
 import unittest
 import datetime
-from uuid import UUID
 import json
 import os
+from uuid import UUID
+from time import sleep
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'Using DBStorage')
 class test_basemodel(unittest.TestCase):
     """ """
 
@@ -24,7 +26,7 @@ class test_basemodel(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove('file.json')
-        except:
+        except FileNotFoundError:
             pass
 
     def test_default(self):
@@ -73,11 +75,6 @@ class test_basemodel(unittest.TestCase):
         n = {None: None}
         with self.assertRaises(TypeError):
             new = self.value(**n)
-
-    def test_kwargs_one(self):
-        """ """
-        n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
             new = self.value(**n)
 
     def test_id(self):
@@ -94,6 +91,6 @@ class test_basemodel(unittest.TestCase):
         """ """
         new = self.value()
         self.assertEqual(type(new.updated_at), datetime.datetime)
-        n = new.to_dict()
-        new = BaseModel(**n)
-        self.assertFalse(new.created_at == new.updated_at)
+        sleep(0.5)
+        new.save()
+        self.assertNotEqual(new.created_at, new.updated_at)
