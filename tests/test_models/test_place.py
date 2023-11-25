@@ -7,63 +7,53 @@ from models.place import Place
 class test_Place(test_basemodel):
     """ """
 
-    def __init__(self, *args, **kwargs):
+    def setUp(self):
         """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Place"
-        self.value = Place
+        self.new = Place(city_id='987-656', user_id='6f4-96c', name='Yard',
+                         description='Nice Yard', number_rooms=2,
+                         number_bathrooms=1, max_guest=3, price_by_night=20.9,
+                         longitude=88.4, latitude=137.3)
 
     def test_city_id(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
+        self.assertEqual(type(self.new.city_id), str)
 
     def test_user_id(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+        self.assertEqual(type(self.new.user_id), str)
 
     def test_name(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+        self.assertEqual(type(self.new.name), str)
 
     def test_description(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.description), str)
+        self.assertEqual(type(self.new.description), str)
 
     def test_number_rooms(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.number_rooms), int)
+        self.assertEqual(type(self.new.number_rooms), int)
 
     def test_number_bathrooms(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.number_bathrooms), int)
+        self.assertEqual(type(self.new.number_bathrooms), int)
 
     def test_max_guest(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.max_guest), int)
+        self.assertEqual(type(self.new.max_guest), int)
 
     def test_price_by_night(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.price_by_night), int)
+        self.assertEqual(type(self.new.price_by_night), float)
 
     def test_latitude(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        self.assertEqual(type(self.new.latitude), float)
 
     def test_longitude(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        self.assertEqual(type(self.new.latitude), float)
 
     def test_amenity_ids(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.amenity_ids), list)
+        self.assertEqual(type(self.new.amenity_ids), list)
