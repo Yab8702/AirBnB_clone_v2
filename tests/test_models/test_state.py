@@ -7,13 +7,11 @@ from models.state import State
 class test_state(test_basemodel):
     """ """
 
-    def __init__(self, *args, **kwargs):
+    def setUp(self):
         """ """
-        super().__init__(*args, **kwargs)
-        self.name = "State"
-        self.value = State
+        self.new = State(name="Texas")
 
-    def test_name3(self):
+    def test_name(self):
         """ """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+        self.assertEqual(type(self.new.name), str)
+        self.assertEqual(self.new.name, "Texas")
